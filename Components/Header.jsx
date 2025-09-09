@@ -9,15 +9,19 @@ const Header = () => {
       <div className='flex justify-between items-center'>
         <Link href='/' className='cursor-pointer'>
             <Image 
-                src={assets.logo} width={190} 
+                src={assets.ozioma} width={190} 
                 alt='title-image' className='w-[130px] sm:w-auto'  
             />
         </Link>
+        <div className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 space-x-8'>
+              <Link href='/' className='cursor-pointer'>About</Link>
+              <Link href='/' className='cursor-pointer'>Contact</Link>
+        </div>
         <button 
             className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
-            border-solid border-black shadow-[-7px_7px_0px_#000000]'>
-                Get Started 
-                <Image src={assets.arrow} alt='image' />
+            border-solid border-black shadow-[-7px_7px_0px_#FF6F61]'>
+                Subscribe
+                {/* <Image src={assets.arrow} alt='image' /> */}
         </button>
       </div>
       <div className='text-center my-10'>
@@ -28,7 +32,7 @@ const Header = () => {
         </p>
         <form 
             className='flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border
-            border-black shadow-[-7px_7px_0px_#000000]' action="">
+            border-black shadow-[-7px_7px_0px_#FF6F61]' action="">
                 <input type="email" placeholder='Enter your email' 
                 className='pl-4 outline-none' name="" id="" />
                 <button type='submit'

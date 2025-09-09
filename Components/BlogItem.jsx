@@ -7,7 +7,7 @@ const BlogItem = ({title, category, description,image,id }) => {
   return (
     <div
       className="max-w-[330px] sm:max-w-[300px] bg-white border border-black 
-    hover:shadow-[-7px_7px_0px_#000000] "
+    hover:shadow-[-7px_7px_0px_#FF6F61] "
     >
       <Link href={`/blogs/${id}`}>
         <Image
@@ -19,7 +19,7 @@ const BlogItem = ({title, category, description,image,id }) => {
         />
       </Link>
       
-      <p className="ml-5 mt-5 px-1 inline-block bg-black text-white text-sm">
+      <p className="ml-5 mt-5 px-1 inline-block bg-[#FF6F61] text-white text-sm">
         {category}
       </p>
       <div className="p-5">
@@ -30,7 +30,7 @@ const BlogItem = ({title, category, description,image,id }) => {
             {description}
         </p>
         <Link href={`/blogs/${id}`} 
-        className="inline-flex items-center py-2 font-semibold text-center cursor-pointer">
+        className="inline-flex items-center py-2 font-semibold text-center text-[#FF6F61] cursor-pointer">
           Read More 
           <Image src={assets.arrow} alt="Arrow" width={12} className="ml-2" />
         </Link>
