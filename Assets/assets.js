@@ -26,6 +26,8 @@ import add_icon from './add_icon.png'
 import email_icon from './email_icon.png'
 import upload_area from './upload_area.png'
 import ozioma from './ozioma.png'
+import ozioma_black from './ozioma_black.png'
+import ozioma_white from './ozioma_white.png'
 
 
 export const assets = {
@@ -40,7 +42,9 @@ export const assets = {
     add_icon,
     email_icon,
     upload_area,
-    ozioma
+    ozioma,
+    ozioma_black,
+    ozioma_white
     }
 
     export const blog_data = [{
