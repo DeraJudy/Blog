@@ -110,9 +110,11 @@ import Footer from "@/Components/Footer";
 import Link from "next/link";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const Page = ({ params }) => {
-    const { id } = React.use(params); // ✅ Correct way to get ID
+  
+    // const { id } = React.use(params); // ✅ Correct way to get ID
   const [data, setData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -122,14 +124,21 @@ const Page = ({ params }) => {
   const visibleLinks = ["About", "Contact", "Categories"];
   const dropdownLinks = ["Chaotic Thoughts", "So Finance", "Reviews", "FAQ"];
 
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(id) === blog_data[i].id) {
-        setData(blog_data[i]);
-        console.log(blog_data[i]);
-        break;
+  const fetchBlogData = async () => {
+    // for (let i = 0; i < blog_data.length; i++) {
+    //   if (Number(id) === blog_data[i].id) {
+    //     setData(blog_data[i]);
+    //     console.log(blog_data[i]);
+    //     break;
+    //   }
+    // }
+
+    const response = await axios.get('/api/blog', {
+      params:{
+        id:params.id
       }
-    }
+    });
+    setData(response.data);
   };
 
   useEffect(() => {
@@ -316,7 +325,7 @@ const Page = ({ params }) => {
             {data.title}
           </h1>
           <Image
-            src={data.author_img}
+            src={data.authorImg}
             alt="Author Img"
             width={150}
             height={150}
@@ -334,10 +343,22 @@ const Page = ({ params }) => {
           alt=""
           className="border-4 border-white"
         />
-        <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>
-        <p>{data.description}</p>
-        <h3 className="my-5 text-[18px] font-semibold">Step 1: Self-Reflection and Goal Setting</h3>
-        <p className="my-3">
+
+        {/* ✅ Render description with spacing / bullet points */}
+        <div className="my-8 space-y-4 text-gray-800 leading-relaxed">
+          {data.description
+            ?.split("\n") // split on new lines
+            .map((line, index) => (
+              <p key={index} className="text-base">
+                {line}
+              </p>
+            ))}
+        </div>
+
+        {/* <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>
+        <p>{data.description}</p> */}
+        {/* <h3 className="my-5 text-[18px] font-semibold">Step 1: Self-Reflection and Goal Setting</h3> */}
+        {/* <p className="my-3">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit neque
           voluptates tempora! Saepe soluta qui nisi obcaecati asperiores nihil eaque
           velit ipsam? Eum rerum dolor debitis ab harum minima itaque!
@@ -359,7 +380,7 @@ const Page = ({ params }) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit neque
           voluptates tempora! Saepe soluta qui nisi obcaecati asperiores nihil eaque
           velit ipsam? Eum rerum dolor debitis ab harum minima itaque!
-        </p>
+        </p> */}
         <div className="my-24">
           <p className="text-black font font-semibold my-4">
             Share this article on social media

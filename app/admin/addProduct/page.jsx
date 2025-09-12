@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const page = () => {
 
-  const [image, setImage] = useState(false) 
+  const [image, setImage] = useState(false)
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -16,18 +16,18 @@ const page = () => {
     authorImg: "/author_img.png",
   })
 
-  const onChangeHandler = (event) =>{
+  const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setData(data=>({...data,[name]:value}))
+    setData(data => ({ ...data, [name]: value }))
     console.log(data);
   }
 
   const onSubmitHandler = async (e) => {
     // to stop it from refreshing anytime you click on the ADD button
-    e.preventDefault(); 
+    e.preventDefault();
     const formData = new FormData();
-    formData.append('title',data.title);
+    formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('category', data.category);
     formData.append('author', data.author);
@@ -45,7 +45,7 @@ const page = () => {
         authorImg: "/author_img.png",
       });
     }
-    else{
+    else {
       toast.error("Error");
     }
   }
@@ -58,9 +58,11 @@ const page = () => {
       </label>
       <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden required />
       <p className='text-xl mt-4 font-bold'>Blog Title</p>
-      <input name='title' onChange={onChangeHandler} value={data.title} className='w-full sm:w-[500px] mt-4 px-4 py-3 border ' type="text" placeholder='Type Here' required />
+      <input name='title' onChange={onChangeHandler} value={data.title} className='w-full sm:w-[500px] mt-4 px-4 py-3 border ' type="text" 
+      placeholder='Type Here' required />
       <p className='text-xl mt-4 font-bold'>Blog Description</p>
-      <textarea name='description' onChange={onChangeHandler} value={data.description} className='w-full sm:w-[500px] mt-4 px-4 py-3 border ' type="text" placeholder='Write Content Here' rows={6} required />
+      <textarea name='description' onChange={onChangeHandler} value={data.description} className='w-full sm:w-[500px] mt-4 px-4 py-3 border ' 
+      type="text" placeholder='Write Content Here' rows={6} required />
       <p className='text-xl mt-4'>Blog Category</p>
       <select name="category" onChange={onChangeHandler} value={data.category} className='w-40 mt-4 px-4 py-3 border text-gray-500'>
         <option value="So Finance">So Finance</option>
