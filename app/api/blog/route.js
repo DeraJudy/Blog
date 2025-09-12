@@ -15,11 +15,15 @@ const LoadDB = async () => {
 // This ensures the DB connection is established once
 LoadDB();
 
+// API ENDPOINT to get all blogs
 export async function GET(request) {
-    // console.log("Blog GET Hit");
-    return NextResponse.json({message: "API Working"});
+
+    const blogs = await BlogModel.find({});
+    return NextResponse.json({blogs})
+
 }
 
+// API ENDPOINT FOR UPLOADING BLOGS
 export async function POST(request) {
 
     const formData = await request.formData();

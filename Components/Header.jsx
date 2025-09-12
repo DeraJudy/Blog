@@ -65,7 +65,7 @@ export default function Navbar() {
 
   // Separate visible + dropdown links manually
   const visibleLinks = ["About", "Contact", "Categories"];
-  const dropdownLinks = ["Chaotic Thoughts", "So Finance", "Reviews", "FAQ"];
+  const dropdownLinks = ["Chaotic Thoughts", "So Finance", "Lifestyle", "FAQ"];
 
   return (
     <nav className="bg-white shadow-md top-0 w-full z-50">

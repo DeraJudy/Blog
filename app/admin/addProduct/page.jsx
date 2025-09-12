@@ -11,7 +11,7 @@ const page = () => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    category: "StartUp",
+    category: "So Finance",
     author: "Ozioma Ulu",
     authorImg: "/author_img.png",
   })
@@ -35,7 +35,15 @@ const page = () => {
     formData.append('image', image);
     const response = await axios.post('/api/blog', formData);
     if (response.data.success) {
-      toast.success(response.data.msg)
+      toast.success(response.data.msg);
+      setImage(false);
+      setData({
+        title: "",
+        description: "",
+        category: "So Finance",
+        author: "Ozioma Ulu",
+        authorImg: "/author_img.png",
+      });
     }
     else{
       toast.error("Error");
@@ -43,7 +51,7 @@ const page = () => {
   }
 
   return (
-    <form className='pt-5 px-5 sm:pt-12 sm:pl-16'>
+    <form onSubmit={onSubmitHandler} className='pt-5 px-5 sm:pt-12 sm:pl-16'>
       <p className='text-xl'>Upload Thumbnail</p>
       <label htmlFor="image">
         <Image className='mt-4' src={!image ? assets.upload_area : URL.createObjectURL(image)} width={140} height={70} alt='' />
@@ -55,8 +63,8 @@ const page = () => {
       <textarea name='description' onChange={onChangeHandler} value={data.description} className='w-full sm:w-[500px] mt-4 px-4 py-3 border ' type="text" placeholder='Write Content Here' rows={6} required />
       <p className='text-xl mt-4'>Blog Category</p>
       <select name="category" onChange={onChangeHandler} value={data.category} className='w-40 mt-4 px-4 py-3 border text-gray-500'>
-        <option value="StartUp">StartUp</option>
-        <option value="Technology">Technology</option>
+        <option value="So Finance">So Finance</option>
+        <option value="Chaotic Thoughts">Chaotic Thoughts</option>
         <option value="Lifestyle">Lifestyle</option>
       </select>
       <br />

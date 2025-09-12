@@ -13,12 +13,12 @@ const BlogList = () => {
         className={menu==="All"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>
             All
         </button>
-        <button onClick={() => setMenu('Technology')} 
-         className={menu==="Technology"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>
-            Technologies
+        <button onClick={() => setMenu('So Finance')} 
+         className={menu==="So Finance"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>
+            So Finance
         </button>
-        <button onClick={() => setMenu('Startup')}
-        className={menu==="Startup"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>Startup</button>
+        <button onClick={() => setMenu('Chaotic Thoughts')}
+        className={menu==="Chaotic Thoughts"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>Chaotic Thoughts</button>
         <button onClick={() => setMenu('Lifestyle')}
         className={menu==="Lifestyle"?'bg-[#FF6F61] text-white py-1 px-4 rounded-sm':""}>Lifestyle</button>
       </div>
