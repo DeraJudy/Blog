@@ -39,7 +39,7 @@ const ContactSection = () => {
             />
             <button
               type="submit"
-              className="bg-[#0ABAB5] text-white px-6 py-3 hover:bg-[#FF6F61] transition"
+              className="bg-[#0ABAB5] text-white px-8 py-3 sm:py-3 sm:px-6 hover:bg-[#FF6F61] transition"
             >
               Subscribe
             </button>
