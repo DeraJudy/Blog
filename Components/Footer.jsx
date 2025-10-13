@@ -130,7 +130,6 @@
 
 
 // File: components/Footer.tsx
-
 import { assets } from "@/Assets/assets";
 import Link from "next/link";
 import Image from "next/image";

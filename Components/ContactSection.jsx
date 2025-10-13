@@ -3,20 +3,20 @@ import { Mail, Twitter, Instagram, Facebook, Linkedin } from "lucide-react";
 
 const ContactSection = () => {
   return (
-    <section className="bg-white py-20 px-6" id="contact">
+    <section className="bg-white pb-20 px-6" id="contact">
       <div className="max-w-4xl mx-auto space-y-16">
         {/* Contact Info */}
         <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold text-gray-800">
-            We love getting emails from readers
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            We love getting emails from you guys
           </h2>
           <p className="text-gray-600">
-            Please feel free to write to Ozioma at{" "}
+            Please feel free to write to us at{" "}
             <a
-              href="mailto:hello@cupofjo.com"
+              href="mailto:hello@oziomapov.com"
               className="text-[#FF6F61] hover:underline hover:text-[#0ABAB5] "
             >
-              hello@cupofjo.com
+              hello@oziomapov.com
             </a>
           </p>
         </div>
