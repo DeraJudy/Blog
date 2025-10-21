@@ -101,14 +101,20 @@ export default function Navbar({ menu, setMenu }) {
 
           {/* Right: Search + Subscribe (Desktop only) */}
           <div className="hidden md:flex items-center space-x-4">
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 font-medium py-2 px-5 border border-black 
                 shadow-[-6px_6px_0px_#0ABAB5]"
             >
               Subscribe
-            </motion.button>
+            </motion.button> */}
+
+            <Link href="/admin/addProduct" className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
+            border-solid border-black shadow-[-7px_7px_0px_#000000]'>
+              Get Started 
+              <Image src={assets.arrow} alt='image' />
+            </Link>
 
             <motion.button
               whileHover={{ rotate: 15, scale: 1.1 }}
