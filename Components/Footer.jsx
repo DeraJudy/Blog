@@ -142,121 +142,156 @@ const Footer = () => {
       }
 
   return (
-    <footer className="bg-[#0ABAB5] text-white px-6 py-10">
-      {/* Top Grid Section */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 
-      gap-10 border-b border-gray-600 pt-2 pb-9">
-
-        {/* Brand + About */}
-        <div>
-          {/* Logo */}
-          <div className="flex justify-center sm:justify-start -ml-2 mb-5">
-             <Image src={assets.ozioma_black} alt="logo" width={200} />
+    <footer className="bg-[#0ABAB5] text-white px-6 py-12">
+      {/* Top Section */}
+      <div
+        className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 
+        gap-12 border-b border-gray-500 pb-10"
+      >
+        {/* Logo + About */}
+        <div className="text-left">
+          <div className="flex justify-start mb-6">
+            <Image
+              src={assets.ozioma_black}
+              alt="OziomaPov Logo"
+              width={160}
+              height={60}
+            />
           </div>
-          <p className="text-sm text-gray-200 mb-4 leading-7">
-            Your trusted IT partner in Lagos since 2016. Delivering excellence
-            in hardware, software, and IT services.
+          <p className="text-sm text-gray-200 leading-7 mb-5">
+            OziomaPov is your go-to lifestyle and thought hub — where real stories,
+            daily inspiration, and authentic voices meet. Dive into creativity,
+            style, culture, and self-growth with a touch of honesty.
           </p>
-          <div className="flex space-x-3">
-            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
-            className="p-2 rounded-md bg-[#FFFFFF19] hover:bg-[#FF6F61]">
-              <FaFacebookF className="h-4 w-4"  />
-            </Link>
 
-            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
-            className="p-2 rounded-md bg-[#FFFFFF19] hover:bg-[#FF6F61]">
+          <div className="flex space-x-3 mt-4">
+            <Link
+              href="https://facebook.com"
+              target="_blank"
+              className="p-2 rounded-md bg-[#ffffff1a] hover:bg-[#FF6F61] transition"
+            >
+              <FaFacebookF className="h-4 w-4" />
+            </Link>
+            <Link
+              href="https://twitter.com"
+              target="_blank"
+              className="p-2 rounded-md bg-[#ffffff1a] hover:bg-[#FF6F61] transition"
+            >
               <FaTwitter className="h-4 w-4" />
             </Link>
-            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-            className="p-2 rounded-md bg-[#FFFFFF19] hover:bg-[#FF6F61]">
-              <FaLinkedinIn  className="h-4 w-4"/>
+            <Link
+              href="https://linkedin.com"
+              target="_blank"
+              className="p-2 rounded-md bg-[#ffffff1a] hover:bg-[#FF6F61] transition"
+            >
+              <FaLinkedinIn className="h-4 w-4" />
             </Link>
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
-            className="p-2 rounded-md bg-[#FFFFFF19] hover:bg-[#FF6F61]">
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              className="p-2 rounded-md bg-[#ffffff1a] hover:bg-[#FF6F61] transition"
+            >
               <FaInstagram className="h-4 w-4" />
             </Link>
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="font-semibold text-xl mb-3 text-white">Explore</h4>
-          <ul className="space-y-4 text-sm mt-9">
-            <li><Link href="/about" className="hover:text-[#FF6F61]">About Us</Link></li>
-            <li><Link href="/services" className="hover:text-[#FF6F61]">Chaotic Thoughts</Link></li>
-            <li><Link href="/projects" className="hover:text-[#FF6F61]">Lifestyle</Link></li>
-            <li><Link href="/team" className="hover:text-[#FF6F61]">So Finance</Link></li>
-            <li><Link href="/careers" className="hover:text-[#FF6F61]">Contact</Link></li>
-            {/* <li><Link href="/blog" className="hover:text-[#FF6F61]">Blog</Link></li> */}
+        {/* Explore */}
+        <div className="text-left">
+          <h4 className="font-semibold text-xl mb-4 text-white">Explore</h4>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <Link href="/about" className="hover:text-[#FF6F61]">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-[#FF6F61]">
+                Chaotic Thoughts
+              </Link>
+            </li>
+            <li>
+              <Link href="/projects" className="hover:text-[#FF6F61]">
+                Lifestyle
+              </Link>
+            </li>
+            <li>
+              <Link href="/team" className="hover:text-[#FF6F61]">
+                So Finance
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-[#FF6F61]">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
-        {/* Our Services */}
-        {/* <div>
-          <h4 className="font-semibold text-xl mb-3 text-white">Our Services</h4>
-          <ul className="space-y-4 text-sm mt-7">
-            <li><Link href="/hardware-sales" className="hover:text-[#FF6F61]">Hardware Sales</Link></li>
-            <li><Link href="/it-repair" className="hover:text-[#FF6F61]">IT Repair</Link></li>
-            <li><Link href="/software-development" className="hover:text-[#FF6F61]">Software Development</Link></li>
-            <li><Link href="/cloud-solutions" className="hover:text-[#FF6F61]">Cloud Solutions</Link></li>
-          </ul>
-        </div> */}
+        {/* Newsletter */}
+        <div className="text-left">
+          <h4 className="font-semibold text-xl mb-4 text-white">
+            Join Our Newsletter
+          </h4>
+          <p className="text-sm text-gray-200 mb-5">
+            Get the latest stories, trends, and updates straight to your inbox.
+          </p>
+          <form
+            onSubmit={OnSubmitHandler}
+            className="flex items-center border border-black shadow-[-7px_7px_0px_#000000] rounded-md overflow-hidden"
+          >
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="email"
+              placeholder="Enter your email"
+              className="pl-4 py-3 text-black w-full outline-none"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-black text-white py-3 px-5 font-semibold hover:bg-[#FF6F61] transition"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
 
-          {/* Subscribe Form */}
-         <form onSubmit={OnSubmitHandler}
-                className='flex justify-between max-w-[500px] scale-75 sm:scale-100  mt-10 border
-            border-black shadow-[-7px_7px_0px_#000000]' action="">
-                <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Enter your email'
-                    className='pl-4 outline-none' name="" id="" />
-                <button onSubmit={OnSubmitHandler} type='submit'
-                    className='border-l cursor-pointer border-black py-4 px-4 sm:px-8 active:bg-gray-600 
-                    active:text-white'>
-                    Subscribe
-                </button>
-            </form>
-
-        {/* Contact Us */}
-        <div>
-          <h4 className="font-semibold text-xl mb-3 text-white">Contact Us</h4>
-          <div className="space-y-4 text-sm mt-4">
-            {/* <div className="flex items-center space-x-3">
-              <FaLocationArrow className="text-[#FF6F61]" />
-              <p>Ikoyi, Lagos, Nigeria</p>
-            </div> */}
-            <div className="flex items-center space-x-3">
+        {/* Contact Info */}
+        <div className="text-left">
+          <h4 className="font-semibold text-xl mb-4 text-white">Contact Us</h4>
+          <ul className="space-y-3 text-sm">
+            {/* <li className="flex items-center gap-2">
               <FaPhone className="text-[#FF6F61]" />
               <Link href="tel:08067593064" className="hover:text-[#FF6F61]">
                 0806 759 3064
               </Link>
-            </div>
-            <div className="flex items-center space-x-3">
+            </li> */}
+            <li className="flex items-center gap-2">
               <FaEnvelope className="text-[#FF6F61]" />
               <Link
                 href="mailto:hello@oziomapov.com"
                 className="hover:text-[#FF6F61]"
               >
-                pematrixtechnologies@gmail.com
+                hello@oziomapov.com
               </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
-
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-4 pt-5 px-1 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-gray-300">
-        <p>© 2025 oziomapov. All rights reserved.</p>
-        <div className="space-x-4 mt-2 sm:mt-0">
-          <span>
-            Designed by  
-            <Link href="/" className="ml-2 hover:text-[#FF6F61]">
-               C.L.U.J
-            </Link>
-          </span>
-          {/* <Link href="/terms-of-service" className="hover:text-[#0ABAB5]">
-            Terms of Service
-          </Link> */}
-        </div>
+      <div
+        className="max-w-7xl mx-auto mt-6 pt-5 flex flex-col sm:flex-row 
+        justify-between items-start sm:items-center text-xs sm:text-sm text-gray-200"
+      >
+        <p>© 2025 OziomaPov. All rights reserved.</p>
+        <p className="mt-3 sm:mt-0">
+          Designed by{" "}
+          <Link href="/" className="hover:text-[#FF6F61] font-medium">
+            C.L.U.J
+          </Link>
+        </p>
       </div>
     </footer>
   );

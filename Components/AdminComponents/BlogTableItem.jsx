@@ -29,14 +29,14 @@ const BlogTableItem = ({authorImg, title, author, date, deleteBlog, mongoId}) =>
         </button>
       </td>
 
-      <td className="pr-6 py-4 ">
+      {/* <td className="pr-6 py-4 ">
         <button
           className="p-2 rounded hover:bg-green-100 transition"
           aria-label="Edit Blog"
         >
           <MdEdit size={22} color="green" />
         </button>
-      </td>
+      </td> */}
 
     </tr>
   )
