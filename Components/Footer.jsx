@@ -158,7 +158,7 @@ const Footer = () => {
               height={60}
             />
           </div>
-          <p className="text-sm text-gray-200 leading-7 mb-5">
+          <p className="text-sm text-black font-bold leading-7 mb-5">
             OziomaPov is your go-to lifestyle and thought hub — where real stories,
             daily inspiration, and authentic voices meet. Dive into creativity,
             style, culture, and self-growth with a touch of honesty.
@@ -198,8 +198,8 @@ const Footer = () => {
 
         {/* Explore */}
         <div className="text-left">
-          <h4 className="font-semibold text-xl mb-4 text-white">Explore</h4>
-          <ul className="space-y-3 text-sm">
+          <h4 className="font-extrabold text-2xl mb-4 text-white">Explore</h4>
+          <ul className="space-y-3 text-sm text-black font-bold">
             <li>
               <Link href="/about" className="hover:text-[#FF6F61]">
                 About Us
@@ -230,15 +230,15 @@ const Footer = () => {
 
         {/* Newsletter */}
         <div className="text-left">
-          <h4 className="font-semibold text-xl mb-4 text-white">
+          <h4 className="font-extrabold text-2xl mb-4 text-white">
             Join Our Newsletter
           </h4>
-          <p className="text-sm text-gray-200 mb-5">
+          <p className="text-sm text-black font-bold mb-5">
             Get the latest stories, trends, and updates straight to your inbox.
           </p>
           <form
             onSubmit={OnSubmitHandler}
-            className="flex items-center border border-black shadow-[-7px_7px_0px_#000000] rounded-md overflow-hidden"
+            className="flex items-center border border-black shadow-[-7px_7px_0px_#FF6F61] rounded-md overflow-hidden"
           >
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -259,8 +259,8 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div className="text-left">
-          <h4 className="font-semibold text-xl mb-4 text-white">Contact Us</h4>
-          <ul className="space-y-3 text-sm">
+          <h4 className="font-extrabold text-2xl mb-4 text-white">Contact Us</h4>
+          <ul className="space-y-3 font-bold text-black text-sm">
             {/* <li className="flex items-center gap-2">
               <FaPhone className="text-[#FF6F61]" />
               <Link href="tel:08067593064" className="hover:text-[#FF6F61]">
@@ -268,7 +268,7 @@ const Footer = () => {
               </Link>
             </li> */}
             <li className="flex items-center gap-2">
-              <FaEnvelope className="text-[#FF6F61]" />
+              <FaEnvelope className="text-[#FF6F61] font-bold" />
               <Link
                 href="mailto:hello@oziomapov.com"
                 className="hover:text-[#FF6F61]"
@@ -283,7 +283,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div
         className="max-w-7xl mx-auto mt-6 pt-5 flex flex-col sm:flex-row 
-        justify-between items-start sm:items-center text-xs sm:text-sm text-gray-200"
+        justify-between items-start sm:items-center text-xs sm:text-sm text-black font-bold"
       >
         <p>© 2025 OziomaPov. All rights reserved.</p>
         <p className="mt-3 sm:mt-0">
