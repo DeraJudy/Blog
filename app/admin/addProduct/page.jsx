@@ -33,7 +33,7 @@ const page = () => {
     formData.append('author', data.author);
     formData.append('authorImg', data.authorImg);
     formData.append('image', image);
-    const response = await axios.post('/api/blog', formData);
+    const response = await axios.post('https://blog-loxs.onrender.com/api/blog', formData);
     if (response.data.success) {
       toast.success(response.data.msg);
       setImage(false);
