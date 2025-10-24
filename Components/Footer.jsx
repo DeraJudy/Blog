@@ -244,7 +244,7 @@ const Footer = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
-              placeholder="Enter your email"
+              placeholder="Where should I put the good stuff?"
               className="pl-4 py-3 text-black w-full outline-none"
               required
             />
