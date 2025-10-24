@@ -505,9 +505,10 @@ export default function Navbar({ menu, setMenu }) {
     {
       title: "Everyday Stuff",
       subtopics: [
-        { label: "Wellness", path: "/lifestyle/wellness" },
-        { label: "Home & Decor", path: "/lifestyle/home" },
-        { label: "Travel", path: "/lifestyle/travel" },
+        { label: "Wellness", path: "/wellness" },
+        { label: "Home & Decor", path: "/home" },
+        { label: "Travel", path: "/travel" },
+        { label: "Lifestyle", path: "/lifestyle" },
       ],
     },
   ];

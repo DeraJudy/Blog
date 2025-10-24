@@ -234,7 +234,7 @@ const Footer = () => {
             Join Our Newsletter
           </h4>
           <p className="text-sm text-black font-bold mb-5">
-            Get the latest stories, trends, and updates straight to your inbox.
+            Get the stories, reflections, and little life thoughts you’ll actually want to read straight to your inbox.
           </p>
           <form
             onSubmit={OnSubmitHandler}

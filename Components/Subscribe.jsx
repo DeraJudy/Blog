@@ -21,11 +21,13 @@ const Subscribe = () => {
     }
 
     return (
-        <div className='text-center my-10'>
-            <h1 className='text-3xl sm:text-5xl font-medium'>Latest Blogs</h1>
+        <div className='text-center my-12'>
+            <h1 className='text-3xl sm:text-4xl font-medium'>From My Mind To Yours</h1>
             <p className='mt-6 max-w-[740px] m-auto text-xs sm:text-base'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium alias,
-                maxime amet inventore ab quam voluptates est ratione consequatur.
+                Pull up a chair — I write about the things we all think about every day 
+                but rarely say out loud. From everyday moments to money talks, from passion 
+                and struggles to the small wins that keep us going, each post is a pause to breathe, 
+                reflect, and find a bit of yourself in my words.
             </p>
             <form onSubmit={OnSubmitHandler}
                 className='flex justify-between max-w-[500px] scale-75 sm:scale-100 mx-auto mt-10 border
