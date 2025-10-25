@@ -7,11 +7,11 @@ import { toast } from 'react-toastify'
 
 const page = () => {
 
-  const [image, setImage] = useState(false)
+  const [image, setImage] = useState(false);
   const [data, setData] = useState({
     title: "",
     description: "",
-    category: "So Finance",
+    category: "Internships",
     author: "Ozioma Ulu",
     authorImg: "/author_img.png",
   })
@@ -65,7 +65,19 @@ const page = () => {
       type="text" placeholder='Write Content Here' rows={6} required />
       <p className='text-xl mt-4'>Blog Category</p>
       <select name="category" onChange={onChangeHandler} value={data.category} className='w-40 mt-4 px-4 py-3 border text-gray-500'>
-        <option value="So Finance">So Finance</option>
+        <option value="So Finance">Internships</option>
+        <option value="So Finance">Remote Work</option>
+        <option value="So Finance">Freelance Tips</option>
+        <option value="So Finance">Budgeting</option>
+        <option value="So Finance">Savings</option>
+        <option value="So Finance">Investing Basics</option>
+        <option value="So Finance">Relationships</option>
+        <option value="So Finance">Mental Health</option>
+        <option value="So Finance">Adulting Tips</option>
+        <option value="So Finance">Reflections</option>
+        <option value="So Finance">Wellness</option>
+        <option value="So Finance">Home & Decor</option>
+        <option value="So Finance">Travel</option>
         <option value="Chaotic Thoughts">Chaotic Thoughts</option>
         <option value="Lifestyle">Lifestyle</option>
       </select>
