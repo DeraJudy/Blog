@@ -40,7 +40,7 @@ const page = () => {
       setData({
         title: "",
         description: "",
-        category: "So Finance",
+        category: "Investing Basics",
         author: "Ozioma Ulu",
         authorImg: "/author_img.png",
       });
