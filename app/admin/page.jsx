@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 const page = () => {
   return (
     <div>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer  position="top-center" autoClose={3000} />
     </div>
   )
 }
