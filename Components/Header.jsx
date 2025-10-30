@@ -585,7 +585,7 @@ export default function Navbar({ menu, setMenu }) {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Left Nav - visible only above 950px */}
-          <div className="hidden [@media(min-width:950px)]:flex space-x-6">
+          <div className="hidden [@media(min-width:1050px)]:flex space-x-6">
             {renderNavItems(leftNavItems)}
           </div>
 
@@ -602,7 +602,7 @@ export default function Navbar({ menu, setMenu }) {
           </div>
 
           {/* Right Nav + Search + Button - visible only above 950px */}
-          <div className="hidden [@media(min-width:950px)]:flex items-center space-x-6">
+          <div className="hidden [@media(min-width:1050px)]:flex items-center space-x-6">
             {renderNavItems(rightNavItems)}
 
             <Link
@@ -625,7 +625,7 @@ export default function Navbar({ menu, setMenu }) {
           </div>
 
           {/* Mobile Header */}
-          <div className="flex [@media(min-width:950px)]:hidden w-full justify-between items-center absolute left-0 px-4 top-0 h-20">
+          <div className="flex [@media(min-width:1050px)]:hidden w-full justify-between items-center absolute left-0 px-4 top-0 h-20">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
