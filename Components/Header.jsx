@@ -516,7 +516,7 @@ export default function Navbar({ menu, setMenu }) {
   const renderNavItems = (navItems) =>
     navItems.map((item, index) => {
       const color = colors[index % colors.length];
-      const isActive = pathname.startsWith(item.path);
+      const isActive = pathname.startsWith(item.path || "");
       const hasDropdown = item.subtopics.length > 0;
 
       return (
@@ -528,18 +528,12 @@ export default function Navbar({ menu, setMenu }) {
         >
           <Link
             href={item.path || "#"}
-            className={`text-lg font-medium px-4 py-1 transition-all duration-200 ${
-              isActive
-                ? "border-b-4"
-                : "border-b-4 border-transparent hover:border-opacity-70"
-            }`}
-            style={{
-              borderColor: isActive ? color : "transparent",
-              color: "#333",
-            }}
+            className={`text-lg font-medium px-4 py-1 transition-all duration-200` }
           >
             {item.title}
-            {hasDropdown && <ChevronDown className="inline-block ml-1 w-4 h-4" />}
+            {hasDropdown && (
+              <ChevronDown className="inline-block ml-1 w-4 h-4" />
+            )}
           </Link>
 
           {/* Desktop Dropdown */}
@@ -550,28 +544,26 @@ export default function Navbar({ menu, setMenu }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute mt-2 w-56 rounded-lg shadow-lg p-3 space-y-2"
-                style={{ backgroundColor: "#fff" }}
+                className="absolute mt-2 w-56 rounded-lg shadow-lg p-3 space-y-2 bg-white"
               >
                 {item.subtopics.map((sub) => (
-                 <Link
-  key={sub.path}
-  href={sub.path}
-  onClick={() => setActiveDropdown(null)}
-  className="block px-3 py-2 rounded-md transition text-black hover:text-white"
-  style={{
-    backgroundColor: "transparent",
-  }}
-  onMouseEnter={(e) =>
-    (e.currentTarget.style.backgroundColor = color)
-  }
-  onMouseLeave={(e) =>
-    (e.currentTarget.style.backgroundColor = "transparent")
-  }
->
-  {sub.label}
-</Link>
-
+                  <Link
+                    key={sub.path}
+                    href={sub.path}
+                    onClick={() => setActiveDropdown(null)}
+                    className="block px-3 py-2 rounded-md transition text-black hover:text-white"
+                    style={{
+                      backgroundColor: "transparent",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = color)
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor = "transparent")
+                    }
+                  >
+                    {sub.label}
+                  </Link>
                 ))}
               </motion.div>
             )}
@@ -581,16 +573,24 @@ export default function Navbar({ menu, setMenu }) {
     });
 
   return (
-    <nav className="bg-white shadow-sm w-full z-50 border-b border-gray-200">
+    <nav
+      className="
+        bg-white shadow-sm w-full z-50 
+        border-b border-gray-200 
+        [@media(min-width:1200px)]:border-none
+      "
+    >
+      {/* ↑ Added [@media(min-width:1200px)]:border-none to remove bottom border on desktop */}
+
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Left Nav - visible only above 950px */}
-          <div className="hidden [@media(min-width:1050px)]:flex space-x-6">
+          {/* Left Nav - visible only from 1200px and above */}
+          <div className="hidden [@media(min-width:1200px)]:flex space-x-6">
             {renderNavItems(leftNavItems)}
           </div>
 
           {/* Center Logo */}
-          <div className="flex-shrink-0 text-2xl font-bold text-gray-900 mx-auto [@media(min-width:950px)]:mx-0">
+          <div className="flex-shrink-0 text-2xl font-bold text-gray-900 mx-auto [@media(min-width:1200px)]:mx-0">
             <Link href="/" onClick={() => setMenu("All")}>
               <Image
                 src={assets.ozioma_black}
@@ -601,8 +601,8 @@ export default function Navbar({ menu, setMenu }) {
             </Link>
           </div>
 
-          {/* Right Nav + Search + Button - visible only above 950px */}
-          <div className="hidden [@media(min-width:1050px)]:flex items-center space-x-6">
+          {/* Right Nav + Search + Button - visible only from 1200px */}
+          <div className="hidden [@media(min-width:1200px)]:flex items-center space-x-6">
             {renderNavItems(rightNavItems)}
 
             <Link
@@ -624,8 +624,8 @@ export default function Navbar({ menu, setMenu }) {
             </motion.button>
           </div>
 
-          {/* Mobile Header */}
-          <div className="flex [@media(min-width:1050px)]:hidden w-full justify-between items-center absolute left-0 px-4 top-0 h-20">
+          {/* Mobile Header - below 1200px */}
+          <div className="flex [@media(min-width:1200px)]:hidden w-full justify-between items-center absolute left-0 px-4 top-0 h-20">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
@@ -642,7 +642,7 @@ export default function Navbar({ menu, setMenu }) {
         </div>
       </div>
 
-      {/* Mobile Dropdown (200px–950px) */}
+      {/* Mobile Dropdown (below 1200px) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -650,33 +650,32 @@ export default function Navbar({ menu, setMenu }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white shadow-lg border-t border-gray-200"
+            className="[@media(min-width:1200px)]:hidden bg-white shadow-lg border-t border-gray-200"
           >
-            <div className="px-6 py-8 space-y-6 text-xl font-semibold">
-              {/* Dynamic Categories including About */}
+            <div className="px-6 py-4 space-y-3 text-xl font-semibold">
               {[...leftNavItems, ...rightNavItems].map((category, index) => {
                 const color = colors[index % colors.length];
                 return (
                   <div
                     key={category.title}
-                    className="pt-4 pb-3 border-b"
+                    className="pb-3 border-b"
                     style={{ borderColor: color }}
                   >
                     <p
-                      className="font-bold uppercase text-lg px-3 py-2 rounded-md"
+                      className="font-bold text-lg px-3 py-2 rounded-md"
                       style={{
                         color: color,
                       }}
                     >
                       {category.title}
                     </p>
-                    <div className="mt-3 grid grid-cols-2 gap-3">
+                    <div className="mt-1 grid grid-cols-2 gap-3">
                       {category.subtopics.map((sub) => (
                         <Link
                           key={sub.path}
                           href={sub.path}
                           onClick={() => setIsOpen(false)}
-                          className={`block text-gray-700 text-lg px-2 py-1 rounded-md transition ${
+                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${
                             pathname === sub.path ? "font-bold" : ""
                           }`}
                           onMouseEnter={(e) =>
@@ -695,7 +694,6 @@ export default function Navbar({ menu, setMenu }) {
                 );
               })}
 
-              {/* Get Started Button in Mobile */}
               <Link
                 href="/admin/addProduct"
                 onClick={() => setIsOpen(false)}
