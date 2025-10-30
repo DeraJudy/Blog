@@ -40,7 +40,7 @@ const page = () => {
       setData({
         title: "",
         description: "",
-        category: "Investing Basics",
+        category: "Internships",
         author: "Ozioma Ulu",
         authorImg: "/author_img.png",
       });
@@ -65,19 +65,19 @@ const page = () => {
       type="text" placeholder='Write Content Here' rows={6} required />
       <p className='text-xl mt-4'>Blog Category</p>
       <select name="category" onChange={onChangeHandler} value={data.category} className='w-40 mt-4 px-4 py-3 border text-gray-500'>
-        <option value="So Finance">Internships</option>
-        <option value="So Finance">Remote Work</option>
-        <option value="So Finance">Freelance Tips</option>
-        <option value="So Finance">Budgeting</option>
-        <option value="So Finance">Savings</option>
-        <option value="So Finance">Investing Basics</option>
-        <option value="So Finance">Relationships</option>
-        <option value="So Finance">Mental Health</option>
-        <option value="So Finance">Adulting Tips</option>
-        <option value="So Finance">Reflections</option>
-        <option value="So Finance">Wellness</option>
-        <option value="So Finance">Home & Decor</option>
-        <option value="So Finance">Travel</option>
+        <option value="Internships">Internships</option>
+        <option value="Remote Worke">Remote Work</option>
+        <option value="Freelance Tips">Freelance Tips</option>
+        <option value="Budgeting">Budgeting</option>
+        <option value="Savings">Savings</option>
+        <option value="Investing Basics">Investing Basics</option>
+        <option value="Relationships">Relationships</option>
+        <option value="Mental Health">Mental Health</option>
+        <option value="Adulting Tips">Adulting Tips</option>
+        <option value="Reflections">Reflections</option>
+        <option value="Wellness">Wellness</option>
+        <option value="Home & Decor">Home & Decor</option>
+        <option value="Travel">Travel</option>
         <option value="Chaotic Thoughts">Chaotic Thoughts</option>
         <option value="Lifestyle">Lifestyle</option>
       </select>
