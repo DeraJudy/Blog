@@ -83,6 +83,11 @@ import BlogModel from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
+setInterval(() => {
+  fetch("https://blog-loxs.onrender.com");
+}, 10 * 60 * 1000);
+
+
 // Initialize Supabase client (server-side)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

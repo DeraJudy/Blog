@@ -23,7 +23,7 @@ const Subscribe = () => {
     return (
         <div className='text-center my-12'>
             <h1 className='text-3xl sm:text-4xl font-medium'>From My Mind To Yours</h1>
-            <p className='mt-6 max-w-[740px] m-auto text-xs sm:text-base'>
+            <p className='mt-6 max-w-[740px] px-7 m-auto text-xs sm:text-base'>
                 Pull up a chair — I write about the things we all think about every day 
                 but rarely say out loud. From everyday moments to money talks, from passion 
                 and struggles to the small wins that keep us going, each post is a pause to breathe, 

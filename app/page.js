@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <ToastContainer theme="dark" />
-      <Header  menu={menu} setMenu={setMenu} />
+      <Header />
       <Subscribe />
       <BlogList  menu={menu} setMenu={setMenu} />
       <Footer />

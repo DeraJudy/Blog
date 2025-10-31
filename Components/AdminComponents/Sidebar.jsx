@@ -67,7 +67,9 @@ const Sidebar = () => {
       >
         {/* Header with logo + close button */}
         <div className="flex items-center justify-between px-4 sm:pl-14 py-3 border-b border-black">
-          <Image src={assets.ozioma_black} width={160} alt="Logo" />
+          <Link href="/">
+            <Image src={assets.ozioma_black} width={160} alt="Logo" />
+          </Link>
           {/* Close Button (only visible on mobile) */}
           <button
             className="sm:hidden p-1 border border-black rounded-md"

@@ -1,9 +1,29 @@
-import React from 'react'
+"use client"
 import { Mail, Twitter, Instagram, Facebook, Linkedin } from "lucide-react";
+import axios from 'axios';
+import React, { useState } from 'react'
+import { toast } from 'react-toastify';
 
 const ContactSection = () => {
+
+   const [email, setEmail] = useState("");
+  
+      const OnSubmitHandler = async (e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("email", email);
+          const response = await axios.post('/api/email', formData);
+          if (response.data.success) {
+              toast.success(response.data.msg);
+              setEmail();
+          }
+          else{
+              toast.error("Error")
+          }
+      }
+
   return (
-    <section className="bg-white pb-20 px-6" id="contact">
+    <section id="contact" className="bg-white mt-10 pb-20 px-6">
       <div className="max-w-4xl mx-auto space-y-16">
         {/* Contact Info */}
         <div className="text-center space-y-4">
@@ -25,20 +45,18 @@ const ContactSection = () => {
         <div className="text-center space-y-6">
           <h3 className="text-2xl font-semibold text-gray-800">Subscribe</h3>
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Subscribed!");
-            }}
+            onSubmit={OnSubmitHandler}
             className="max-w-md mx-auto flex rounded-lg overflow-hidden shadow-md"
           >
             <input
+              onChange={(e)=>setEmail(e.target.value)} value={email}
               type="email"
               required
               placeholder="Enter your email"
               className="flex-1 px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF6F61]"
             />
             <button
-              type="submit"
+              onSubmit={OnSubmitHandler} type='submit'
               className="bg-[#0ABAB5] text-white px-8 py-3 sm:py-3 sm:px-6 hover:bg-[#FF6F61] transition"
             >
               Subscribe
