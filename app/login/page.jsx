@@ -81,15 +81,18 @@
 //   );
 // }
 
-import ClientLogin from '@/Components/ClientLogin'
-import React from 'react'
+// /app/login/page.jsx
+import React, { Suspense } from 'react';
+import ClientLogin from '@/Components/ClientLogin';
 
 const page = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <ClientLogin />
+      <Suspense fallback={<p>Loading...</p>}>
+        <ClientLogin />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
