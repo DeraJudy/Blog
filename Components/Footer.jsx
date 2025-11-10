@@ -244,13 +244,13 @@ const Footer = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
-              placeholder="Where should I put the good stuff?"
+              placeholder="Place it here"
               className="pl-4 py-3 text-black w-full outline-none"
               required
             />
             <button
               type="submit"
-              className="bg-black text-white py-3 px-5 font-semibold hover:bg-[#FF6F61] transition"
+              className="bg-black text-white py-3 px-5 font-semibold hover:bg-[#B3BFFF] transition"
             >
               Subscribe
             </button>

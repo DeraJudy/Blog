@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar({ menu, setMenu }) {
@@ -12,16 +12,12 @@ export default function Navbar({ menu, setMenu }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
-
 
   const colors = ["#000", "#DD7BDF", "#BADFDB", "#FFA4A4", "#B3BFFF"];
 
@@ -82,7 +78,6 @@ export default function Navbar({ menu, setMenu }) {
   const renderNavItems = (navItems) =>
     navItems.map((item, index) => {
       const color = colors[index % colors.length];
-      const isActive = pathname.startsWith(item.path || "");
       const hasDropdown = item.subtopics.length > 0;
 
       return (
@@ -97,12 +92,9 @@ export default function Navbar({ menu, setMenu }) {
             className={`text-lg font-medium px-4 py-1 transition-all duration-200`}
           >
             {item.title}
-            {hasDropdown && (
-              <ChevronDown className="inline-block ml-1 w-4 h-4" />
-            )}
           </Link>
 
-          {/* Desktop Dropdown */}
+          {/* ✅ Clean Dropdown Animation */}
           <AnimatePresence>
             {activeDropdown === item.title && hasDropdown && (
               <motion.div
@@ -118,9 +110,7 @@ export default function Navbar({ menu, setMenu }) {
                     href={sub.path}
                     onClick={() => setActiveDropdown(null)}
                     className="block px-3 py-2 rounded-md transition text-black hover:text-white"
-                    style={{
-                      backgroundColor: "transparent",
-                    }}
+                    style={{ backgroundColor: "transparent" }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.backgroundColor = color)
                     }
@@ -139,23 +129,15 @@ export default function Navbar({ menu, setMenu }) {
     });
 
   return (
-    <nav
-      className="
-        bg-white shadow-sm w-full z-50 
-        border-b border-gray-200 
-        [@media(min-width:1200px)]:border-none
-      "
-    >
-      {/* ↑ Added [@media(min-width:1200px)]:border-none to remove bottom border on desktop */}
-
+    <nav className="bg-white shadow-sm w-full z-50 border-b border-gray-200 [@media(min-width:1200px)]:border-none">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Left Nav - visible only from 1200px and above */}
+          {/* Left Nav */}
           <div className="hidden [@media(min-width:1200px)]:flex space-x-6">
             {renderNavItems(leftNavItems)}
           </div>
 
-          {/* Center Logo */}
+          {/* Logo */}
           <div className="shrink-0 text-2xl font-bold text-gray-900 mx-auto [@media(min-width:1200px)]:mx-0">
             <Link href="/" onClick={() => setMenu("All")}>
               <Image
@@ -167,7 +149,7 @@ export default function Navbar({ menu, setMenu }) {
             </Link>
           </div>
 
-          {/* Right Nav + Search + Button - visible only from 1200px */}
+          {/* Right Nav */}
           <div className="hidden [@media(min-width:1200px)]:flex items-center space-x-6">
             {renderNavItems(rightNavItems)}
 
@@ -181,40 +163,45 @@ export default function Navbar({ menu, setMenu }) {
                 <Image src={assets.arrow} alt="arrow" />
               </Link>
 
-              {/* {user ? (
-                <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold uppercase">
-                  {user.name?.charAt(0)}
-                </div>
-              ) : (
-                <Link href={`/login?redirect=${pathname}`} className="font-semibold">
-                  Login
-                </Link>
-              )} */}
-
+              {/* ✅ Updated user dropdown with smooth animation */}
               {user ? (
-                <div className="relative group">
+                <div
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown("user")}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
                   <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold uppercase cursor-pointer">
                     {user.name?.charAt(0)}
                   </div>
 
-                  {/* Dropdown Menu */}
-                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
-                    <Link
-                      href="/logout"
-                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                    >
-                      Logout
-                    </Link>
-                  </div>
+                  <AnimatePresence>
+                    {activeDropdown === "user" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg p-2"
+                      >
+                        <Link
+                          href="/logout"
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded-md"
+                        >
+                          Logout
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
-                <Link href={`/login?redirect=${pathname}`} className="font-semibold">
+                <Link
+                  href={`/login?redirect=${pathname}`}
+                  className="font-semibold"
+                >
                   Login
                 </Link>
               )}
-
             </div>
-
 
             <motion.button
               whileHover={{ rotate: 15, scale: 1.1 }}
@@ -226,7 +213,7 @@ export default function Navbar({ menu, setMenu }) {
             </motion.button>
           </div>
 
-          {/* Mobile Header - below 1200px */}
+          {/* Mobile Header */}
           <div className="flex [@media(min-width:1200px)]:hidden w-full justify-between items-center absolute left-0 px-4 top-0 h-20">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -244,7 +231,7 @@ export default function Navbar({ menu, setMenu }) {
         </div>
       </div>
 
-      {/* Mobile Dropdown (below 1200px) */}
+      {/* Mobile Dropdown (unchanged) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -265,9 +252,7 @@ export default function Navbar({ menu, setMenu }) {
                   >
                     <p
                       className="font-bold text-lg px-3 py-2 rounded-md"
-                      style={{
-                        color: color,
-                      }}
+                      style={{ color }}
                     >
                       {category.title}
                     </p>
@@ -277,14 +262,15 @@ export default function Navbar({ menu, setMenu }) {
                           key={sub.path}
                           href={sub.path}
                           onClick={() => setIsOpen(false)}
-                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${pathname === sub.path ? "font-bold" : ""
-                            }`}
+                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${
+                            pathname === sub.path ? "font-bold" : ""
+                          }`}
                           onMouseEnter={(e) =>
                             (e.currentTarget.style.backgroundColor = color)
                           }
                           onMouseLeave={(e) =>
-                          (e.currentTarget.style.backgroundColor =
-                            "transparent")
+                            (e.currentTarget.style.backgroundColor =
+                              "transparent")
                           }
                         >
                           {sub.label}
@@ -319,15 +305,14 @@ export default function Navbar({ menu, setMenu }) {
                     </Link>
                   </>
                 ) : (
-                  <Link href={`/login?redirect=${pathname}`} className="font-semibold">
+                  <Link
+                    href={`/login?redirect=${pathname}`}
+                    className="font-semibold"
+                  >
                     Login
                   </Link>
                 )}
-
               </div>
-
-
-
             </div>
           </motion.div>
         )}

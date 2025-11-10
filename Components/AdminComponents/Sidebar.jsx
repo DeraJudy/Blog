@@ -107,6 +107,16 @@ const Sidebar = () => {
             <Image src={assets.email_icon} alt="" width={28} />
             <p>Subscriptions</p>
           </Link>
+
+          <Link
+            href="/admin/userlist"
+            className="flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white hover:bg-gray-100 shadow-[-5px_5px_0px_#000000]"
+            onClick={() => setIsOpen(false)}
+          >
+            <Image src={assets.email_icon} alt="" width={28} />
+            <p>Users</p>
+          </Link>
+
         </div>
       </div>
 
