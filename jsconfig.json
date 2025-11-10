@@ -5,3 +5,15 @@
     }
   }
 }
+
+
+// {
+//   "compilerOptions": {
+//     "moduleResolution": "bundler",
+//     "baseUrl": ".",
+//     "paths": {
+//       "@/*": ["*"]
+//     }
+//   },
+//   "exclude": ["node_modules"]
+// }

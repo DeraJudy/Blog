@@ -1,7 +1,7 @@
 "use client";
 import { assets } from "@/Assets/assets";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
@@ -12,6 +12,16 @@ export default function Navbar({ menu, setMenu }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
 
   const colors = ["#000", "#DD7BDF", "#BADFDB", "#FFA4A4", "#B3BFFF"];
 
@@ -84,7 +94,7 @@ export default function Navbar({ menu, setMenu }) {
         >
           <Link
             href={item.path || "#"}
-            className={`text-lg font-medium px-4 py-1 transition-all duration-200` }
+            className={`text-lg font-medium px-4 py-1 transition-all duration-200`}
           >
             {item.title}
             {hasDropdown && (
@@ -146,7 +156,7 @@ export default function Navbar({ menu, setMenu }) {
           </div>
 
           {/* Center Logo */}
-          <div className="flex-shrink-0 text-2xl font-bold text-gray-900 mx-auto [@media(min-width:1200px)]:mx-0">
+          <div className="shrink-0 text-2xl font-bold text-gray-900 mx-auto [@media(min-width:1200px)]:mx-0">
             <Link href="/" onClick={() => setMenu("All")}>
               <Image
                 src={assets.ozioma_black}
@@ -161,14 +171,50 @@ export default function Navbar({ menu, setMenu }) {
           <div className="hidden [@media(min-width:1200px)]:flex items-center space-x-6">
             {renderNavItems(rightNavItems)}
 
-            <Link
-              href="/admin/addProduct"
-              className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
-              border-solid border-black shadow-[-7px_7px_0px_#000000]"
-            >
-              Get Started
-              <Image src={assets.arrow} alt="arrow" />
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/admin/addProduct"
+                className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
+                border-solid border-black shadow-[-7px_7px_0px_#000000]"
+              >
+                Get Started
+                <Image src={assets.arrow} alt="arrow" />
+              </Link>
+
+              {/* {user ? (
+                <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold uppercase">
+                  {user.name?.charAt(0)}
+                </div>
+              ) : (
+                <Link href={`/login?redirect=${pathname}`} className="font-semibold">
+                  Login
+                </Link>
+              )} */}
+
+              {user ? (
+                <div className="relative group">
+                  <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold uppercase cursor-pointer">
+                    {user.name?.charAt(0)}
+                  </div>
+
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
+                    <Link
+                      href="/logout"
+                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                    >
+                      Logout
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <Link href={`/login?redirect=${pathname}`} className="font-semibold">
+                  Login
+                </Link>
+              )}
+
+            </div>
+
 
             <motion.button
               whileHover={{ rotate: 15, scale: 1.1 }}
@@ -231,15 +277,14 @@ export default function Navbar({ menu, setMenu }) {
                           key={sub.path}
                           href={sub.path}
                           onClick={() => setIsOpen(false)}
-                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${
-                            pathname === sub.path ? "font-bold" : ""
-                          }`}
+                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${pathname === sub.path ? "font-bold" : ""
+                            }`}
                           onMouseEnter={(e) =>
                             (e.currentTarget.style.backgroundColor = color)
                           }
                           onMouseLeave={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "transparent")
+                          (e.currentTarget.style.backgroundColor =
+                            "transparent")
                           }
                         >
                           {sub.label}
@@ -250,15 +295,39 @@ export default function Navbar({ menu, setMenu }) {
                 );
               })}
 
-              <Link
-                href="/admin/addProduct"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center text-base gap-2 font-medium w-40 px-5 py-3 border 
-                border-solid border-black shadow-[-7px_7px_0px_#000000]"
-              >
-                Get Started
-                <Image src={assets.arrow} alt="image" />
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/admin/addProduct"
+                  className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
+                  border-solid border-black shadow-[-7px_7px_0px_#000000]"
+                >
+                  Get Started
+                  <Image src={assets.arrow} alt="arrow" />
+                </Link>
+
+                {user ? (
+                  <>
+                    <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold uppercase">
+                      {user.name?.charAt(0)}
+                    </div>
+                    <Link
+                      href="/logout"
+                      className="block text-red-600 font-semibold mt-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Logout
+                    </Link>
+                  </>
+                ) : (
+                  <Link href={`/login?redirect=${pathname}`} className="font-semibold">
+                    Login
+                  </Link>
+                )}
+
+              </div>
+
+
+
             </div>
           </motion.div>
         )}

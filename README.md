@@ -19,6 +19,8 @@ npm install axios
 npm install react-toastify => Install beautiful alert messages
 npm install mongoose
 npm install react-icons
+npm install react-hot-toast react-loading-skeleton
+
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
