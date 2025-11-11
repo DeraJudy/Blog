@@ -166,7 +166,7 @@ const BlogListPage = () => {
           {loading ? (
             // Cute loading spinner
             <div className="flex justify-center items-center h-full">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-500 border-b-4 border-purple-300"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-500 border-b-4"></div>
               <span className="ml-4 text-purple-600 text-lg font-semibold">🌸 Loading blogs... 🌸</span>
             </div>
           ) : (

@@ -168,7 +168,7 @@ const AddBlogPage = () => {
 
       const response = await axios.post("/api/blog", formData);
       if (response.data.success) {
-        toast.success(response.data.msg);
+        toast.success("🌸 " + response.data.msg);
         setData({
           title: "",
           description: "",
@@ -178,56 +178,61 @@ const AddBlogPage = () => {
         });
         setImage(null);
       } else {
-        toast.error(response.data.msg || "Failed to add blog");
+        toast.error("⚠️ " + (response.data.msg || "Failed to add blog"));
       }
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong");
+      toast.error("⚠️ Something went wrong");
     }
   };
 
   return (
     <ProtectedAdmin>
-      <form onSubmit={onSubmitHandler} className="pt-5 px-5 sm:pt-12 sm:pl-16">
-        <p className="text-xl">Upload Thumbnail</p>
-        <label htmlFor="image">
+      <form onSubmit={onSubmitHandler} className="pt-5 px-5 sm:pt-12 sm:pl-16 space-y-6">
+        {/* Thumbnail Upload */}
+        <p className="text-xl font-semibold text-[#B3BFFF]">🌸 Upload Thumbnail 🌸</p>
+        <label htmlFor="image" className="cursor-pointer hover:scale-105 transition-transform duration-200">
           <Image
-            className="mt-4"
+            className="rounded-xl border-2 border-dashed border-purple-300"
             src={image ? URL.createObjectURL(image) : assets.upload_area}
-            width={140}
-            height={70}
+            width={160}
+            height={90}
             alt="thumbnail"
           />
         </label>
         <input type="file" id="image" hidden onChange={(e) => setImage(e.target.files[0])} />
 
-        <p className="text-xl mt-4 font-bold">Blog Title</p>
+        {/* Title */}
+        <p className="text-xl font-semibold mt-8 text-[#B3BFFF]">✏️ Blog Title</p>
         <input
           name="title"
           value={data.title}
           onChange={onChangeHandler}
-          className="w-full sm:w-[500px] mt-4 px-4 py-3 border"
-          placeholder="Type here"
+          className="w-full sm:w-[500px] px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-300"
+          placeholder="Type here..."
           required
         />
 
-        <p className="text-xl mt-4 font-bold">Blog Description</p>
+        {/* Description */}
+        <p className="text-xl font-semibold mt-6 text-[#B3BFFF]">📝 Blog Description</p>
         <textarea
           name="description"
           value={data.description}
           onChange={onChangeHandler}
-          className="w-full sm:w-[500px] mt-4 px-4 py-3 border"
+          className="w-full sm:w-[500px] px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-300 "
           rows={6}
-          placeholder="Write content here"
+          placeholder="Write your amazing content here..."
           required
         />
 
-        <p className="text-xl mt-4">Blog Category</p>
+        {/* Category */}
+        <p className="text-xl font-semibold mt-2 text-[#B3BFFF]">🏷️ Blog Category</p>
         <select
           name="category"
           value={data.category}
           onChange={onChangeHandler}
-          className="w-40 mt-4 px-4 py-3 border text-gray-500"
+          className="w-48 px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FFA4A4] text-purple-700 
+          bg-purple-50 hover:bg-purple-100"
         >
           <option value="Internships">Internships</option>
           <option value="Remote Work">Remote Work</option>
@@ -246,7 +251,16 @@ const AddBlogPage = () => {
           <option value="Lifestyle">Lifestyle</option>
         </select>
 
-        <button type="submit" className="mt-8 w-40 h-12 bg-black text-white">ADD</button>
+        {/* Submit Button */}
+        <div>
+            <button
+            type="submit"
+            className="mt-3 w-40 h-12 bg-[#FFA4A4] hover:bg-purple-600 text-white rounded-2xl shadow-lg 
+            transition-transform duration-200 hover:scale-105"
+          >
+            🌸 ADD BLOG 🌸
+          </button>
+        </div>
       </form>
       <ToastContainer position="top-center" autoClose={3000} />
     </ProtectedAdmin>
