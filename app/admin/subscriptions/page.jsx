@@ -2,6 +2,7 @@
 import axios from "axios";
 import SubscriptionsTabeItem from '@/Components/AdminComponents/SubscriptionsTabeItem'
 import React, { useEffect, useState } from 'react'
+import ProtectedAdmin from "@/Components/ProtectedAdmin";
 
 const page = () => {
 
@@ -12,38 +13,40 @@ const page = () => {
     setEmails(response.data.emails)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchEmails();
   }, [])
 
   return (
-    <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
-      <h1>All Subscription</h1>
-      <div className='relative max-w-[600px] h-[80vh] overflow-x-auto mt-4 border 
+    <ProtectedAdmin>
+      <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
+        <h1>All Subscription</h1>
+        <div className='relative max-w-[600px] h-[80vh] overflow-x-auto mt-4 border 
       border-gray-400 scrollbar-hide  '>
-        <table className='w-full text-sm text-gray-500'>
-          <thead className='text-xs text-left text-gray-700 uppercase bg-grey-50'>
-            <tr className=''>
-              <th scope='col' className='px-6 py-3'>
-                Email Subscription
-              </th>
-              <th scope='col' className='hidden sm:block px-6 py-3'>
-                Date
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {emails.map((item, index) =>{
-              return <SubscriptionsTabeItem key={index} mongoId={item._id} email={item.email} date={item.date} />;
-            })}
-            
-          </tbody>
-        </table>
+          <table className='w-full text-sm text-gray-500'>
+            <thead className='text-xs text-left text-gray-700 uppercase bg-grey-50'>
+              <tr className=''>
+                <th scope='col' className='px-6 py-3'>
+                  Email Subscription
+                </th>
+                <th scope='col' className='hidden sm:block px-6 py-3'>
+                  Date
+                </th>
+                <th scope='col' className='px-6 py-3'>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {emails.map((item, index) => {
+                return <SubscriptionsTabeItem key={index} mongoId={item._id} email={item.email} date={item.date} />;
+              })}
+
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </ProtectedAdmin>
   )
 }
 

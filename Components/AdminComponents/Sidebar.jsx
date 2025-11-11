@@ -62,11 +62,12 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed sm:static top-0 left-0 h-screen bg-slate-100 flex flex-col border-r border-black z-40 transition-transform duration-300 ease-in-out
+        className={`fixed sm:static top-0 left-0 h-screen bg-[#BADFDB] flex flex-col border-r border-black z-40 
+          transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0`}
       >
         {/* Header with logo + close button */}
-        <div className="flex items-center justify-between px-4 sm:pl-14 py-3 border-b border-black">
+        <div className="flex items-center justify-between px-4 sm:pl-14 py-[22px] border-b border-black">
           <Link href="/">
             <Image src={assets.ozioma_black} width={160} alt="Logo" />
           </Link>

@@ -1,7 +1,6 @@
 import { blog_data } from '@/Assets/assets'
 import React, { useEffect, useState } from 'react'
 import BlogItem from './BlogItem'
-import BlogSlider from './BlogSlider';
 import axios from 'axios';
 import { Import } from 'lucide-react';
 

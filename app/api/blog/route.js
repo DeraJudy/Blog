@@ -78,103 +78,213 @@
 // /api/blog/route.js  (or whatever path you're using)
 // Apis to manage blogs posts
 
+// import { ConnectDB } from "@/lib/config/db";
+// import BlogModel from "@/lib/models/BlogModel";
+// import { NextResponse } from "next/server";
+// import { createClient } from "@supabase/supabase-js";
+
+// // setInterval(() => {
+// //   fetch("https://blog-loxs.onrender.com");
+// // }, 10 * 60 * 1000);
+
+
+// // Initialize Supabase client (server-side)
+// const supabase = createClient(
+//   process.env.NEXT_PUBLIC_SUPABASE_URL,
+//   process.env.SUPABASE_SERVICE_ROLE_KEY // server-only
+// );
+
+// const BUCKET = process.env.SUPABASE_BUCKET || "blog-images"; // bucket name
+
+// // Ensure DB connection once
+// const LoadDB = async () => {
+//   await ConnectDB();
+//   console.log("Database Loaded");
+// };
+// LoadDB();
+
+// // GET: fetch blogs or single blog by id
+// export async function GET(request) {
+//   const blogId = request.nextUrl.searchParams.get("id");
+
+//   if (blogId) {
+//     const blog = await BlogModel.findById(blogId);
+//     return NextResponse.json(blog);
+//   } else {
+//     const blogs = await BlogModel.find({});
+//     return NextResponse.json({ blogs });
+//   }
+// }
+
+// // POST: upload image to Supabase storage, save blog doc
+// export async function POST(request) {
+//   try {
+//     const formData = await request.formData();
+//     const imageFile = formData.get("image"); // File object or null
+
+//     let imgUrl = "";
+//     let supabasePath = ""; // store filename/path in DB so we can delete later
+
+//     if (imageFile && imageFile.size) {
+//       // Convert to buffer
+//       const imageBytes = await imageFile.arrayBuffer();
+//       const buffer = Buffer.from(imageBytes);
+
+//       // Create a unique filename
+//       const timestamp = Date.now();
+//       const originalName = imageFile.name.replace(/\s+/g, "_");
+//       const fileName = `${timestamp}_${originalName}`;
+
+//       // Upload to Supabase bucket
+//       const { error: uploadError } = await supabase.storage
+//         .from(BUCKET)
+//         .upload(fileName, buffer, {
+//           contentType: imageFile.type,
+//           cacheControl: "3600",
+//           upsert: false,
+//         });
+
+//       if (uploadError) {
+//         console.error("Supabase upload error:", uploadError);
+//         return NextResponse.json({ success: false, msg: "Image upload failed" });
+//       }
+
+//       // Get public URL
+//       const { data: publicUrlData } = supabase.storage.from(BUCKET).getPublicUrl(fileName);
+//       imgUrl = publicUrlData?.publicUrl || "";
+//       supabasePath = fileName;
+//     }
+
+//     const blogData = {
+//       title: `${formData.get("title") || ""}`,
+//       description: `${formData.get("description") || ""}`,
+//       category: `${formData.get("category") || ""}`,
+//       author: `${formData.get("author") || ""}`,
+//       image: imgUrl, // public URL
+//       supabasePath, // used later for delete
+//       authorImg: `${formData.get("authorImg") || ""}`,
+//     };
+
+//     await BlogModel.create(blogData);
+//     console.log("Blog Saved");
+//     return NextResponse.json({ success: true, msg: "Blog Added", data: blogData });
+//   } catch (err) {
+//     console.error("POST error:", err);
+//     return NextResponse.json({ success: false, msg: "Something went wrong" });
+//   }
+// }
+
+// // DELETE: remove blog doc and delete file from Supabase storage
+// export async function DELETE(request) {
+//   try {
+//     const id = request.nextUrl.searchParams.get("id");
+//     if (!id) return NextResponse.json({ success: false, msg: "Missing id" });
+
+//     const blog = await BlogModel.findById(id);
+//     if (!blog) return NextResponse.json({ success: false, msg: "Blog not found" });
+
+//     // If we have a stored supabasePath, delete the file from storage
+//     if (blog.supabasePath) {
+//       const { error: removeError } = await supabase.storage.from(BUCKET).remove([blog.supabasePath]);
+//       if (removeError) {
+//         console.warn("Failed to remove file from Supabase:", removeError);
+//         // continue to delete DB record even if file deletion fails, or return error — your choice
+//       } else {
+//         console.log("Removed file from Supabase:", blog.supabasePath);
+//       }
+//     } else {
+//       console.log("No supabasePath found for blog, skipping file deletion");
+//     }
+
+//     await BlogModel.findByIdAndDelete(id);
+//     return NextResponse.json({ success: true, msg: "Blog Article Deleted" });
+//   } catch (err) {
+//     console.error("DELETE error:", err);
+//     return NextResponse.json({ success: false, msg: "Something went wrong" });
+//   }
+// }
+
+
 import { ConnectDB } from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-setInterval(() => {
-  fetch("https://blog-loxs.onrender.com");
-}, 10 * 60 * 1000);
-
-
-// Initialize Supabase client (server-side)
+// Supabase client (server-side)
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY // server-only
+  process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const BUCKET = process.env.SUPABASE_BUCKET || "blog-images"; // bucket name
+const BUCKET = process.env.SUPABASE_BUCKET || "blog-images";
 
-// Ensure DB connection once
+// Ensure DB connection
 const LoadDB = async () => {
   await ConnectDB();
   console.log("Database Loaded");
 };
 LoadDB();
 
-// GET: fetch blogs or single blog by id
+// GET: fetch blogs or single blog by ID
 export async function GET(request) {
   const blogId = request.nextUrl.searchParams.get("id");
 
   if (blogId) {
     const blog = await BlogModel.findById(blogId);
     return NextResponse.json(blog);
-  } else {
-    const blogs = await BlogModel.find({});
-    return NextResponse.json({ blogs });
   }
+
+  const blogs = await BlogModel.find({}).sort({ createdAt: -1 });
+  return NextResponse.json({ blogs });
 }
 
-// POST: upload image to Supabase storage, save blog doc
+// POST: upload blog + image to Supabase
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    const imageFile = formData.get("image"); // File object or null
+    const imageFile = formData.get("image");
 
     let imgUrl = "";
-    let supabasePath = ""; // store filename/path in DB so we can delete later
+    let supabasePath = "";
 
     if (imageFile && imageFile.size) {
-      // Convert to buffer
-      const imageBytes = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(imageBytes);
-
-      // Create a unique filename
+      const buffer = Buffer.from(await imageFile.arrayBuffer());
       const timestamp = Date.now();
-      const originalName = imageFile.name.replace(/\s+/g, "_");
-      const fileName = `${timestamp}_${originalName}`;
+      const fileName = `${timestamp}_${imageFile.name.replace(/\s+/g, "_")}`;
 
-      // Upload to Supabase bucket
       const { error: uploadError } = await supabase.storage
         .from(BUCKET)
-        .upload(fileName, buffer, {
-          contentType: imageFile.type,
-          cacheControl: "3600",
-          upsert: false,
-        });
+        .upload(fileName, buffer, { contentType: imageFile.type });
 
       if (uploadError) {
         console.error("Supabase upload error:", uploadError);
         return NextResponse.json({ success: false, msg: "Image upload failed" });
       }
 
-      // Get public URL
       const { data: publicUrlData } = supabase.storage.from(BUCKET).getPublicUrl(fileName);
       imgUrl = publicUrlData?.publicUrl || "";
       supabasePath = fileName;
     }
 
     const blogData = {
-      title: `${formData.get("title") || ""}`,
-      description: `${formData.get("description") || ""}`,
-      category: `${formData.get("category") || ""}`,
-      author: `${formData.get("author") || ""}`,
-      image: imgUrl, // public URL
-      supabasePath, // used later for delete
-      authorImg: `${formData.get("authorImg") || ""}`,
+      title: formData.get("title") || "",
+      description: formData.get("description") || "",
+      category: formData.get("category") || "",
+      author: formData.get("author") || "",
+      authorImg: formData.get("authorImg") || "",
+      image: imgUrl,
+      supabasePath,
     };
 
-    await BlogModel.create(blogData);
-    console.log("Blog Saved");
-    return NextResponse.json({ success: true, msg: "Blog Added", data: blogData });
+    const blog = await BlogModel.create(blogData);
+    return NextResponse.json({ success: true, msg: "Blog Added", data: blog });
   } catch (err) {
     console.error("POST error:", err);
     return NextResponse.json({ success: false, msg: "Something went wrong" });
   }
 }
 
-// DELETE: remove blog doc and delete file from Supabase storage
+// DELETE: remove blog + image
 export async function DELETE(request) {
   try {
     const id = request.nextUrl.searchParams.get("id");
@@ -183,21 +293,13 @@ export async function DELETE(request) {
     const blog = await BlogModel.findById(id);
     if (!blog) return NextResponse.json({ success: false, msg: "Blog not found" });
 
-    // If we have a stored supabasePath, delete the file from storage
     if (blog.supabasePath) {
-      const { error: removeError } = await supabase.storage.from(BUCKET).remove([blog.supabasePath]);
-      if (removeError) {
-        console.warn("Failed to remove file from Supabase:", removeError);
-        // continue to delete DB record even if file deletion fails, or return error — your choice
-      } else {
-        console.log("Removed file from Supabase:", blog.supabasePath);
-      }
-    } else {
-      console.log("No supabasePath found for blog, skipping file deletion");
+      const { error } = await supabase.storage.from(BUCKET).remove([blog.supabasePath]);
+      if (error) console.warn("Failed to remove file from Supabase:", error);
     }
 
     await BlogModel.findByIdAndDelete(id);
-    return NextResponse.json({ success: true, msg: "Blog Article Deleted" });
+    return NextResponse.json({ success: true, msg: "Blog Deleted" });
   } catch (err) {
     console.error("DELETE error:", err);
     return NextResponse.json({ success: false, msg: "Something went wrong" });

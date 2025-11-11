@@ -15,16 +15,24 @@ export async function POST(req) {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return NextResponse.json({ error: "Invalid password" }, { status: 400 });
 
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    // const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, {
+    //   expiresIn: "7d",
+    // });
 
-    const res = NextResponse.json({
+    const token = jwt.sign(
+      { id: user._id, email: user.email, name: user.name, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    return NextResponse.json({
     message: "Login successful",
     user: {
       name: user.name,
-      email: user.email
+      email: user.email,
+      role: user.role // <--- this is key
     }
+
   });
 
     res.cookies.set("token", token, { httpOnly: true, path: "/" });

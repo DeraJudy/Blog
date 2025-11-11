@@ -20,6 +20,9 @@ npm install react-toastify => Install beautiful alert messages
 npm install mongoose
 npm install react-icons
 npm install react-hot-toast react-loading-skeleton
+$ npm install react-hot-toast
+npm install react-quill
+
 
 
 

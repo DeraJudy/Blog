@@ -154,14 +154,17 @@ export default function Navbar({ menu, setMenu }) {
             {renderNavItems(rightNavItems)}
 
             <div className="flex items-center gap-4">
-              <Link
-                href="/admin/addProduct"
-                className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
-                border-solid border-black shadow-[-7px_7px_0px_#000000]"
-              >
-                Get Started
-                <Image src={assets.arrow} alt="arrow" />
-              </Link>
+              {user && user.role === "admin" && (
+                <Link
+                  href="/admin/addProduct"
+                  className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
+    border-solid border-black shadow-[-7px_7px_0px_#000000]"
+                >
+                  Dashboard
+                </Link>
+              )}
+
+
 
               {/* ✅ Updated user dropdown with smooth animation */}
               {user ? (
@@ -262,15 +265,14 @@ export default function Navbar({ menu, setMenu }) {
                           key={sub.path}
                           href={sub.path}
                           onClick={() => setIsOpen(false)}
-                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${
-                            pathname === sub.path ? "font-bold" : ""
-                          }`}
+                          className={`block uppercase text-gray-700 text-sm px-2 py-1 rounded-md transition ${pathname === sub.path ? "font-bold" : ""
+                            }`}
                           onMouseEnter={(e) =>
                             (e.currentTarget.style.backgroundColor = color)
                           }
                           onMouseLeave={(e) =>
-                            (e.currentTarget.style.backgroundColor =
-                              "transparent")
+                          (e.currentTarget.style.backgroundColor =
+                            "transparent")
                           }
                         >
                           {sub.label}
@@ -282,14 +284,17 @@ export default function Navbar({ menu, setMenu }) {
               })}
 
               <div className="flex items-center gap-4">
-                <Link
-                  href="/admin/addProduct"
-                  className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
-                  border-solid border-black shadow-[-7px_7px_0px_#000000]"
-                >
-                  Get Started
-                  <Image src={assets.arrow} alt="arrow" />
-                </Link>
+                {user && user.role === "admin" && (
+                  <Link
+                    href="/admin/addProduct"
+                    className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border 
+    border-solid border-black shadow-[-7px_7px_0px_#000000]"
+                  >
+                    Dashboard
+                  </Link>
+                )}
+
+
 
                 {user ? (
                   <>

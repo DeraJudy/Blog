@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.76.1",
+    "@syncfusion/ej2-react-richtexteditor": "^31.2.5",
+    "@tiptap/react": "^3.10.5",
+    "@tiptap/starter-kit": "^3.10.5",
     "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
     "framer-motion": "^12.23.12",
